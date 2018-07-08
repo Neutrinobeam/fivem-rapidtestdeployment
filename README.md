@@ -19,7 +19,7 @@ Added a text file viewer to the /rtd display.
 
 Select files from the client filesystem to view as a reference.
 
-Forward and backward case sensetive search (Some slowdown on larger than 1MB files.)
+Forward and backward case sensitive search (Some slowdown on larger than 1MB files.)
 
 How To Install:
 
