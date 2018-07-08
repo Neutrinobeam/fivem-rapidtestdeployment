@@ -1,15 +1,19 @@
 var chatColor = [112, 112, 255];
+var initialSpawn = true;
+var logEnabled = true;
 
-/*
-TODO: Figure out how to do this on first spawn / player join
 on('playerSpawned', function () {
-	emit('chatMessage', 'RTD', chatColor, 'Rapid Test Deployment loaded.');
+	if (initialSpawn) {
+		initialSpawn = false;
+		emit('chatMessage', 'RTD', chatColor, 'Rapid Test Deployment loaded.');
+		emitNet('rtd:firstSpawn');
+	}
 });
-*/
 
 RegisterCommand('rtd', function(source, args) {
 	if (args.length > 0) {
 		parseInput(args.join(' '));
+		confirmLog();
 	}
 	else {
 		ShowInput(true);
@@ -18,14 +22,20 @@ RegisterCommand('rtd', function(source, args) {
 
 emit('chat:addSuggestion', '/rtd', 'Use without arguments to start the RTD function editor.');
 
+onNet('rtd:loggingDisabled', function() {
+	emit('chatMessage', 'RTD', chatcolor, 'Unable to access log file (aerver.log). Disabling logging.');
+	logEnabled = false;
+	CancelEvent();
+});
+
 var ShowInput = function(visible) {
 	SetPlayerControl(PlayerId(), visible ? 0 : 1, 0);
 	SetNuiFocus(visible, visible);
 	SendNuiMessage(JSON.stringify({"type" : 'gui', "visible" : visible}));
 }
 
-RegisterNuiCallbackType('response');
-on('__cfx_nui:response', function(data, cb){
+RegisterNuiCallbackType('rtd:uiResponse');
+on('__cfx_nui:rtd:uiResponse', function(data, cb){
 	ShowInput(false);
 	if (data.isValid) {
 		parseInput(data.text);
@@ -33,6 +43,7 @@ on('__cfx_nui:response', function(data, cb){
 	else {
 		emit('chatMessage', 'RTD', chatColor, 'Function input cancelled.');
 	}
+	confirmLog();
 	cb('ok');
 });
 
@@ -63,3 +74,15 @@ var parseInput = function(s) {
 	}
 	emit('chatMessage', 'RTD', chatColor, this.text);
 }
+
+var log = function(s) {
+	if (logEnabled) {
+		emitNet('rtd:log', s);
+	}
+};
+
+var confirmLog = function() {
+	if (logEnabled) {
+		emitNet('rtd:writeLog');
+	}
+};
