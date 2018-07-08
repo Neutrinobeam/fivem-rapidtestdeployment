@@ -13,6 +13,14 @@ Usage: /rtd [arguments]
   
   [![Alt text](https://img.youtube.com/vi/588ePmiJUoU/0.jpg)](https://youtu.be/588ePmiJUoU)
 
+Version 1.1
+
+Added a text file viewer to the /rtd display.
+
+Select files from the client filesystem to view as a reference.
+
+Forward and backward case sensetive search (Some slowdown on larger than 1MB files.)
+
 How To Install:
 
 Install the rapidtestdeployment folder into your server's resources folder and add 'start rapidtestdeployment'

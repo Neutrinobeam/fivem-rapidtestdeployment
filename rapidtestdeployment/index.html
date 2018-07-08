@@ -1,75 +1,31 @@
 <html>
 	<head>
 		<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
-		<script>
-
-		$(document).ready(function(){
-			window.addEventListener('message', function(event){
-				if (event.data.type == "gui") {
-					document.body.style.display = event.data.visible ? 'block' : 'none';
-				}
-			});
-			
-			$('#cancelBtn').click(function(event){
-				$.post('http://rapidtestdeployment/response', JSON.stringify({"isValid" : false}));
-			});
-			
-			$('#confirmBtn').click(function(event){
-				$.post('http://rapidtestdeployment/response', JSON.stringify({"isValid" : true, "text" : $('#codeArea').val()}));
-			});
-		
-			$(document).keyup(function(event){
-				if (event.key == 'Escape') {
-					$.post('http://rapidtestdeployment/response', JSON.stringify({"isValid" : false}));
-				}
-			});
-			
-			$(document).keydown(function(event){
-				if (event.shiftKey && event.key == 'Enter') {
-					event.preventDefault();
-					$.post('http://rapidtestdeployment/response', JSON.stringify({"isValid" : true, "text" : $('#codeArea').val()}));
-				}
-			});
-		});
-		</script>
-		<style type='text/css'>
-		body {
-			display: none;
-			color: white;
-			background-color: transparent;
-		}
-		div.centered {
-			display: flex;
-			justify-content: center;
-		}
-		div.rightAlign {
-			float: right;
-		}
-		h1 {
-			margin: 0;
-			padding: 0;
-		}
-		#codeArea {
-			color: inherit;
-			background-color: rgba(0, 0, 0, 0.5);
-			border: 0;
-		}
-		#codeArea:hover,#codeArea:active,#codeArea:focus {
-			outline: 0 !important;
-			-webkit-appearance: none;
-		}
-		</style>
+		<script src="ui.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="ui.css">
 	</head>
 	<body>
 		<div class='centered'>
-			<div>
-			<h1>RTD Function Editor</h1>
-			<textarea id='codeArea' cols='140' rows='60' spellcheck='false' autofocus></textarea>
-			<br>
-			<div class='rightAlign'>
-			<button id='cancelBtn'>Cancel</button>
-			<button id='confirmBtn'>Confirm</button>
-			<div>
+			<div class='half'>
+				<h1>RTD Function Editor</h1>
+				<textarea id='codeArea' class='displayArea displayAreaSize' cols='100' rows='50' spellcheck='false' autofocus></textarea>
+				<br>
+				<div class='rightAlign'>
+					<button id='cancelBtn'>Cancel</button>
+					<button id='confirmBtn'>Confirm</button>
+				</div>
+			</div>
+			<div class='midline'></div>
+			<div class='half'>
+				<h1>File Viewer</h1>
+				<textarea id='fileArea' class='displayArea displayAreaSize' cols='100' rows='50' spellcheck='false' readonly='true'></textarea>
+				<div>
+					<input type='file' id='fileElement' name=fileSelection />
+					<button id='findNextBtn'>Find Next</button>
+					<button id='findLastBtn'>Previous</button>
+					<textarea id='searchBox' class='displayArea' cols='30' rows='1' spellcheck='false' style='display: inline'></textarea>
+				</div>
+				<textarea id='mirror' class='displayAreaSize' cols='100' rows='50' spellcheck='false' readonly='true'></textarea>
 			</div>
 		</div>
 	</body>

@@ -1,0 +1,43 @@
+body {
+	display: none;
+	color: white;
+	background-color: transparent;
+}
+div.centered {
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+}
+div.rightAlign {
+	float: right;
+}
+h1 {
+	margin: 0;
+	padding: 0;
+}
+.half {
+	width: 40%;
+}
+.midline {
+	width: 5%;
+}
+.displayAreaSize {
+	width: 100%;
+}
+.displayArea {
+	color: inherit;
+	background-color: rgba(0, 0, 0, 0.5);
+	border: 0;
+}
+.displayArea:hover,.displayArea:active,.displayArea:focus {
+	outline: 0 !important;
+	-webkit-appearance: none;
+}
+#mirror {
+	height: 0;
+	opacity: 0;
+}
+textarea {
+	font-size: 1.2em;
+}
