@@ -14,10 +14,12 @@ Usage: /rtd [arguments]
 Adds alert(string) and log(string) Javascript functions.
 
   alert(string) displays the string above the minimap.
+  
   log(string) writes the string to server.log in the resources/rapidtestdeployment folder.
 
 **Video** (Ver 1.0)
-  [![Alt text](https://img.youtube.com/vi/588ePmiJUoU/0.jpg)](https://youtu.be/588ePmiJUoU)
+
+[![Alt text](https://img.youtube.com/vi/588ePmiJUoU/0.jpg)](https://youtu.be/588ePmiJUoU)
 
 Version 1.2
 
