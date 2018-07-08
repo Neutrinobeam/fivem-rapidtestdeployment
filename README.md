@@ -11,7 +11,24 @@ Usage: /rtd [arguments]
   If no arguments are found, a multi-line text input area is displayed. After editing, use the
   Cancel or Confirm button or the Esc or Shift+Enter keys. 
   
+Adds alert(string) and log(string) Javascript functions.
+
+  alert(string) displays the string above the minimap.
+  log(string) writes the string to server.log in the resources/rapidtestdeployment folder.
+  
   [![Alt text](https://img.youtube.com/vi/588ePmiJUoU/0.jpg)](https://youtu.be/588ePmiJUoU)
+
+Version 1.2
+
+Added chat message that RTD has loaded to first playerSpawn event.
+
+Added log() command, empty server.log file for it to target, and necessary server script for file writing.
+
+/rtd log('Example text'); will write 'Example text' (without the quotes) to server.log.
+
+server.log is overwritten on first player spawn for a client.
+
+log() and server.log may exhibit unintended behavior on a multi-client server (only tested with a single client.)
 
 Version 1.1
 
